@@ -19,50 +19,51 @@
 
 
 
-1) select staff_name, design_code from staff_master where (staff_sal between 1200 and 25000) and (hiredate < '01-jan-2003'); 
+6) select staff_name, design_code from staff_master where (staff_sal between 1200 and 25000) and (hiredate < '01-jan-2003'); 
 
-2) select student_name,to_char(student_dob,'month dd yyyy') as student_dob from student_master where to_char(student_dob,'day') like ('%saturday%') or to_char(student_dob,'day') like ('%sunday%');
+7) select student_name,to_char(student_dob,'month dd yyyy') as student_dob from student_master where to_char(student_dob,'day') like ('%saturday%') or to_char(student_dob,'day') like ('%sunday%');
 
-3) select staff_name, round ((months_between(sysdate,hiredate)),0) as Months_Worked from staff_master order by Months_Worked;
+8) select staff_name, round ((months_between(sysdate,hiredate)),0) as Months_Worked from staff_master order by Months_Worked;
 
-5)alter table staff_master add grade varchar2(20);
+9)alter table staff_master add grade varchar2(20);
   update staff_master set grade='A' where staff_sal>50000;
   update staff_master set grade='B' where staff_sal>25000 and staff_sal<50000;
   update staff_master set grade='C' where staff_sal>10000 and staff_sal<25000;
   update staff_master set grade='D' where staff_sal<10000;
   select staff_name,staff_sal,grade from staff_master;
 
-6) select staff_name,hiredate from staff_master;
+9) select staff_name,hiredate from staff_master;
 
-07)select instr('Mississippi', 'i',2,3) from dual;
+11)select instr('Mississippi', 'i',2,3) from dual;
 
-08) select to_char(next_day(last_day(sysdate)-7,'friday','dd month,yyyy') as payday from dual;
+12) select to_char(next_day(last_day(sysdate)-7,'friday','dd month,yyyy') as payday from dual;
 
-09) select student_code, student_name, decode(dept_code, 20, 'electronics', 30, 'electricals', 'others') department_name from student_master;
+13) select student_code, student_name, decode(dept_code, 20, 'electronics', 30, 'electricals', 'others') department_name from student_master;
  
-10) select round(MAX(staff_sal),0)"Maximum", round(MIN(staff_sal),0)"minimun",round(SUM(staff_sal),0)"sum",round(avg(staff_sal),0)"average", dept_code from staff_master group by dept_code
+14) select round(MAX(staff_sal),0)"Maximum", round(MIN(staff_sal),0)"minimun",round(SUM(staff_sal),0)"sum",round(avg(staff_sal),0)"average", dept_code from staff_master group by dept_code
 
-11) select deptno,count(*) from emp where mgr=7839 group by deptno;
+15) select deptno,count(*) from emp where mgr=7839 group by deptno;
 
-12) create table accountdetails as select *from accountmaster;
+16) create table accountdetails as select *from accountmaster;
 
-13) select staff_name,staff_salary,d.deptcode,d.deptname from staff_master,dept_master d where staff_salary>20000;
+17) select staff_name,staff_salary,d.deptcode,d.deptname from staff_master,dept_master d where staff_salary>20000;
 'rk
-14) select staff code,staff name,staff sal from staff master where staff sal>(select avg(staff sal)from staff master);
- 
-
-15) select s.student_code,s.student_name,b.book_code,m.book_name from student_master s, book_transactions b, book_master m where s.student_code=b.student_code and b.book_code=m.book_code and book_expected_return_date='09-feb-2011'; 
-
-16)select s.staff_code, s.staff_name, b.book_code, b.book_name, bb.book_issue_date, d.design_name, dm.dept_name from staff_master s, book_master b, book_transactions bb, designation_master d, department_master dm whee s.staff_code=bb.staff_code and b.book_code=bb.book_code and sysdate-30<= bb.ook_issue_date;
 
 18) select staff code,staff name,staff sal from staff master where staff sal>(select avg(staff sal)from staff master);
+ 
 
-19) select book_pub_author, book_name fro book_master where book_pub_author in(select book_pub_author from book_master group by book_pub_author having count(book_pub_author)>1);
+19) select s.student_code,s.student_name,b.book_code,m.book_name from student_master s, book_transactions b, book_master m where s.student_code=b.student_code and b.book_code=m.book_code and book_expected_return_date='09-feb-2011'; 
 
-20) select s.staff_name, dm.dept_name, s.staff_name, bt.book_code from staff_master s, book_transactions bt, department_master dm where bt.staff_code = s.staff_code and dm.dept_code = s.dept_code;
+20)select s.staff_code, s.staff_name, b.book_code, b.book_name, bb.book_issue_date, d.design_name, dm.dept_name from staff_master s, book_master b, book_transactions bb, designation_master d, department_master dm whee s.staff_code=bb.staff_code and b.book_code=bb.book_code and sysdate-30<= bb.ook_issue_date;
 
-23) select b.ename, count(*) from emp e join emp b on b.empno = e.mgr group by b.empno,b.ename;
-24) select book_name fro book_master where book_code in (select book_code from book_transactions where book_actual_return_date is null);
+21) select staff code,staff name,staff sal from staff master where staff sal>(select avg(staff sal)from staff master);
+
+22) select book_pub_author, book_name fro book_master where book_pub_author in(select book_pub_author from book_master group by book_pub_author having count(book_pub_author)>1);
+
+23) select s.staff_name, dm.dept_name, s.staff_name, bt.book_code from staff_master s, book_transactions bt, department_master dm where bt.staff_code = s.staff_code and dm.dept_code = s.dept_code;
+
+24) select b.ename, count(*) from emp e join emp b on b.empno = e.mgr group by b.empno,b.ename;
+25) select book_name fro book_master where book_code in (select book_code from book_transactions where book_actual_return_date is null);
 
 26) create table customer(Customerid, number(5), cust_name varchar2(20), Address1 varchar2(30), Address2 varchar2(30));
 
@@ -121,53 +122,53 @@
 
 43) Alter table accountmaster and constraint ck_ac check(accounttype = 'NRI' or accounttype = 'IND');
 
-44) Alter table accountmaster and constraint balance_check(ledger balance > 5000);
+40) Alter table accountmaster and constraint balance_check(ledger balance > 5000);
 
-45)Delete from accountmaster,customertable wherecustomer id=1001;
+51)Delete from accountmaster,customertable wherecustomer id=1001;
 
-46) select staff_sal, department_master.dept_code, department_master.dept_name from staff_master, department_master where staff_sal>20000and mgr_code=NULL;
+52) select staff_sal, department_master.dept_code, department_master.dept_name from staff_master, department_master where staff_sal>20000and mgr_code=NULL;
 
-47) create view acc_view as select (customer_id,customer_name,accountnumber,accounttype,ledgerbalance) from accountmaster;
+53) create view acc_view as select (customer_id,customer_name,accountnumber,accounttype,ledgerbalance) from accountmaster;
 
-48) create view vAccs_Dtls as select Accounttype,ledgerbalance from Accountmaster where where accounttype 'IND' and ledgerbalance < 10000;
+54) create view vAccs_Dtls as select Accounttype,ledgerbalance from Accountmaster where where accounttype 'IND' and ledgerbalance < 10000;
 
-49) create view accsvw10 as select * from employee with READ ONLY;
+55) create view accsvw10 as select * from employee with READ ONLY;
 
-50) create sequence seq_dept minvalue 40 start with 40 increment by 10 maxvalue 200 cache 40;
+56) create sequence seq_dept minvalue 40 start with 40 increment by 10 maxvalue 200 cache 40;
 
-51) create table department_masters(dept_no number, dept_name varchar2(20)) ;
+58) create table department_masters(dept_no number, dept_name varchar2(20)) ;
     insert into department_masters values (seq_dept.NEXTVAL, 'cse');
     insert into department_masters values (seq_dept.NEXTVAL, 'it');
     insert into department_masters values (seq_dept.NEXTVAL, 'ece');
 
-52)DROP sequence seq_dept;
+59)DROP sequence seq_dept;
 
-53) create index no_name on emp(empno);
+60) create index no_name on emp(empno);
 
-54) create  synonym syn_emp for emp;
+61) create  synonym syn_emp for emp;
 
-55) select * from user_synonyms where SYNONYM_NAME='SYNEMP';
+62) select * from user_synonyms where SYNONYM_NAME='SYNEMP';
 
-57) create sequence Seq_Emp start with 1000 increment by 1;
+63) create sequence Seq_Emp start with 1000 increment by 1;
     create table employee(empno number, ename varchar2(30));
     insert into employee values(Seq_Emp.nextval, '&ename');
 
-58) create table employee as select * from emp where 1=3;
+64) create table employee as select * from emp where 1=3;
     desc employee;
 
-60) update table employee set job = (select job from employee where empno = 7788), dept no = (select detno from employee where empno = 7788) where empno = 7698;
+65) update table employee set job = (select job from employee where empno = 7788), dept no = (select detno from employee where empno = 7788) where empno = 7698;
 
-61) alter table employee drop column "sales";
+66) alter table employee drop column "sales";
 
-62) update employee set deptno =(select deptno from employee where empno = 7698)where empno= 7788;
+67) update employee set deptno =(select deptno from employee where empno = 7698)where empno= 7788;
 
-63) insert into employee values(&empno,'&ename','&job',&mgr,'&hiredate',&salary,&comm,&deptno);
+68) insert into employee values(&empno,'&ename','&job',&mgr,'&hiredate',&salary,&comm,&deptno);
 
-64) insert into customermaster value(&customerid, &customername, &gender, &age, &phoneno);
+69) insert into customermaster value(&customerid, &customername, &gender, &age, &phoneno);
 
-65) savepoint SP1;
+70) savepoint SP1;
 
-66) insert into customer_table values(6003, 'John', '#114 Chicago', '#114 Chicago ', 'M',45, 439525,1900.60'; 
+71) insert into customer_table values(6003, 'John', '#114 Chicago', '#114 Chicago ', 'M',45, 439525,1900.60'; 
 
 
 
